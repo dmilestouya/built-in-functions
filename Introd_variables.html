@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Introducción a Variables de Python</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Daniel Miles Touya" />
+    <meta name="date" content="2025-05-29" />
+    <script src="Introd_variables_files/header-attrs-2.29/header-attrs.js"></script>
+    <link href="Introd_variables_files/remark-css-0.0.1/default.css" rel="stylesheet" />
+    <link href="Introd_variables_files/remark-css-0.0.1/metropolis.css" rel="stylesheet" />
+    <link href="Introd_variables_files/remark-css-0.0.1/metropolis-fonts.css" rel="stylesheet" />
+    <link rel="stylesheet" href="custom.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+.title[
+# Introducción a Variables de Python
+]
+.subtitle[
+## Master Data Analysis - Udelar
+]
+.author[
+### Daniel Miles Touya
+]
+.date[
+### 2025-05-29
+]
+
+---
+
+
+
+# Escribiendo Código en Python
+
+Python es un lenguaje de programación versátil que se puede escribir y ejecutar de múltiples formas, dependiendo de tus necesidades y del entorno en el que trabajes.
+
+&lt;b style="color:green"&gt;1.- Editores de texto enriquecidos (IDE o editores de código)&lt;/b&gt;
+
+Son programas que permiten escribir código, explorarlo, depurarlo y ejecutarlo fácilmente.
+
+  -**Visual Studio Code (VS Code)**: uno de los más populares. Soporta extensiones, resaltado de sintaxis, autocompletado, ejecución integrada y más.
+
+  -**PyCharm**: IDE especializado en Python, con herramientas avanzadas para proyectos grandes.
+
+  -**Sublime Text**, **Atom**, entre otros.
+--
+&lt;br&gt;
+
+En estos entornos, puedes:
+
+* Escribir tu código en archivos `.py`, como `hello.py`.
+
+* Ejecutarlos desde la terminal integrada:
+
+  ```bash
+  python hello.py
+  ```
+---
+# Escribiendo Código en Python
+
+&lt;b style="color:green"&gt;2.- Entornos interactivos como Jupyter Notebook&lt;/b&gt;
+
+Jupyter permite escribir código en bloques o celdas, mezclarlo con texto en Markdown, y ejecutar el código de forma incremental.
+
+* Ideal para análisis de datos, visualizaciones, docencia e investigación.
+* Permite ver resultados inmediatamente debajo del código.
+* Replicabilidad
+* Usa extensiones como `.ipynb` en lugar de `.py`.
+
+&lt;img src="jupterNotebook.png" alt="Ejemplo" width="600" height= "400"  title="Celda de código" style = "padding-top:-150px"&gt;
+
+---
+# Escribiendo Código en Python
+
+&lt;b style="color:green"&gt;3.- Terminal interactiva (IPython o Python REPL)&lt;/b&gt;
+
+Puedes abrir una terminal y ejecutar:
+
+```bash
+python
+```
+
+o bien:
+
+```bash
+ipython
+```
+
+Esto abrirá un entorno donde se puede escribir código línea por línea. Por ejemplo:
+
+```python
+&gt;&gt;&gt; print("Hola")
+Hola
+```
+
+Es ideal para probar fragmentos pequeños de código rápidamente.
+
+---
+# Escribiendo Código en Python
+
+En la celda de JN vamos a escribir un _código_ y vamos a guardarlo en un fichero _.py_
+
+.pull-left[
+&lt;b style="color:#6082B6"&gt;Vamos a escribir&lt;/b&gt;
+```python
+%%writefile hello_JN.py
+print("Hola Daniel")
+```
+]
+
+--
+
+.pull-right[
+
+&lt;b style="color:#6082B6"&gt;Vamos a ver si lo creó&lt;/b&gt;
+```python
+!ls hello_JN.py
+```
+]
+
+--
+
+.pull-left[
+&lt;b style="color:#6082B6"&gt;Vamos a ejecutarlo&lt;/b&gt;
+```python
+%run hello_JN.py
+```
+]
+
+.pull-right[
+&lt;b style="color:#6082B6"&gt;Resultado&lt;/b&gt;
+```python
+Hola Daniel
+```
+]
+
+
+---
+# Escribiendo Código en Python
+
+Cuando escribimos `print("Hola Daniel")` hemos usado una &lt;b style="color:brown"&gt;función&lt;/b&gt; en Python: una regla o conjunto de instrucciones que, dadas ciertas entradas (o incluso ninguna), realiza una acción y puede producir un resultado.
+
+--
+
+&gt; En este caso, `print` es una función predefinida que toma un argumento (el texto `"Hola Daniel"`) y produce un efecto: mostrar ese texto en pantalla.
+
+--
+
+&gt; Veremos que las &lt;b style="color:brown"&gt;funciones&lt;/b&gt; son una parte fundamental en la escritura de un script en Python.
+
+
+---
+
+# Variables
+
+Podemos **personalizar** el programa: saludar a quien conteste desde el teclado
+
+--
+
+.pull-left[
+&lt;b style="color:#6082B6"&gt;Escribamos&lt;/b&gt;
+```python
+%%writefile hello_JN.py
+input("¿Cómo te llamas?")
+print("Hola Mundo")
+```
+]
+
+--
+
+.pull-right[
+&lt;b style="color:#6082B6"&gt;Ejecutemos&lt;/b&gt;
+```python
+%run hello_JN.py
+```
+&lt;span style="color:green"&gt;¿Produjo el resultado deseado?&lt;/span&gt;
+]
+
+--
+
+&gt; **No**, debido a que no imprimió en pantalla el nombre del usuario.
+
+--
+
+&gt; &lt;span style="color:green"&gt;¿Será que nos hemos olvidado de asignar el nombre a una **variable**?&lt;/span&gt;
+
+--
+
+&lt;br&gt;
+&lt;br&gt;
+En principio, pensemos en una **variable** como un  `contenedor`(container) de valores. 
+
+
+---
+# Variables
+
+
+Podemos guardar el resultado de la función `input` así:
+
+
+```python
+nombre = input("¿Cómo te llamas? ")
+print("Hola Mundo")
+```
+
+--
+.pull-left[
+Pero no funcionó: no imprimió el `nombre`
+]
+
+--
+
+.pull-right[
+Podríamos escibir `print("Hola nombre")`
+]
+
+--
+
+.pull-left[
+Pero tampoco funciona!!!!!
+]
+
+--
+
+.pull-right[
+Claro...podríamos directamente poner otro print
+
+&lt;b style="color:#6082B6"&gt;
+Introducimos otro `print`&lt;/b&gt;
+
+```python
+nombre = input("¿Cómo te llamas? ")
+print("Hola")
+print(nombre)
+```
+]
+
+---
+# Variables
+
+.pull-left[
+
+&lt;b style="color:#6082B6"&gt;O más compacto&lt;/b&gt;
+```python
+
+nombre = input("¿Cómo te llamas? ")
+print("Hola" + nombre)
+```
+]
+
+--
+
+.pull-right[
+
+&lt;b style="color:#6082B6"&gt;O incluso&lt;/b&gt;
+
+```python
+print("Hola,", nombre)
+```
+]
+
+--
+
+.pull-left[
+&lt;b style="color:#6082B6"&gt;Agregamos comentarios `#`:&lt;/b&gt;
+
+```python
+# Pedir el nombre al usuario
+nombre = input("¿Cómo te llamas? ")
+print("Hola,", nombre)
+```
+]
+
+--
+
+.pull-right[
+&lt;b style="color:#6082B6"&gt;Formato con f-strings&lt;/b&gt;
+```python
+# Pedir el nombre al usuario
+nombre = input("¿Cómo te llamas? ")
+print(f"Hola, {nombre}")
+```
+]
+
+&gt;El prefijo `f` indica que Python debe insertar el &lt;span style = "color:#6082B6 "&gt;valor de la variable&lt;/span&gt; dentro de las llaves `{...}`
+
+
+---
+# Variables
+
+Una &lt;b style="color:brown"&gt;variable&lt;/b&gt; es una referencia (nombre simbólico) a un objeto que reside en memoria. 
+
+--
+
+&gt;Al asignar un valor con el operador `=`, el nombre de la variable se enlaza a una ubicación de memoria que contiene un objeto Python.
+
+&gt;&gt;En `nombre = input("¿Cómo te llamas? ")`, la variable `nombre` no contiene directamente el valor del nombre, sino que apunta a un objeto  almacenado en el `heap` de Python. 
+
+&gt;&gt;Python gestiona este enlace mediante un sistema de referencias (punteros internos) y un recolector de basura.
+
+--
+
+.pull-left[
+&lt;b style="color:#6082B6"&gt;Cada variable tiene un `type`&lt;/b&gt;
+````python
+x = 5              
+precio = 12.99     
+nombre = "Ana"     
+activo = True      
+````
+]
+
+--
+
+.pull-right[
+&lt;b style="color:#6082B6"&gt;Escribir&lt;/b&gt;
+````python
+type(x)      -&gt; int
+type(precio) -&gt; float
+type(nombre) -&gt; str
+type(activo) -&gt; bool
+````
+]
+
+---
+# Variables
+
+Cada &lt;b style="color:brown"&gt;variable&lt;/b&gt; es una referencia a un objeto único en memoria. 
+
+&gt;Incluso si dos variables contienen valores iguales, los objetos a los que apuntan pueden (o no) ser los mismos, dependiendo del tipo y del contexto de creación.
+
+--
+
+.pull-left[
+&lt;b style="color:#6082B6"&gt;Tipear&lt;/b&gt;
+````python
+x = 10.0
+y = 10.0
+print(id(x))      
+print(hex(id(x)))
+print(id(y))
+print(hex(id(y)))
+````
+]
+
+--
+
+.pull-right[
+&lt;b style="color:#6082B6"&gt;Tipear&lt;/b&gt;
+
+````python
+x = 10
+y = 10
+print(id(x))      
+print(hex(id(x)))
+print(id(y))
+print(hex(id(y)))
+````
+]
+
+&gt;Python pre-asigna (internamente) los objetos enteros pequeños —por defecto, los valores enteros entre -5 y 256— y los reutiliza para optimizar el rendimiento y el uso de memoria.
+
+---
+
+# Variables
+
+Vamos este ejemplo: observar `x is y`
+
+.pull-left[
+
+````python
+x = 10
+y = x
+print(id(x))      
+print(hex(id(x)))
+print(id(y)      )
+print(hex(id(y)))
+print(x is y) 
+x = 3
+print("\n")
+print(id(x))      
+print(hex(id(x)))
+print(id(y)      )
+print(hex(id(y)))
+print(x is y)
+print(x)
+print(y)
+````
+]
+
+--
+
+.pull-right[
+&lt;b style="color:#6082B6"&gt;Typer&lt;/b&gt;
+
+````python
+type(x is y)
+````
+]
+
+
+---
+# Variable type `str`
+
+¿Qué puedes hacer con una variable tipo `str`?
+
+.pull-left[
+Puedes limpiar espacios en blanco al principio y al final de la cadena.
+
+```python
+nombre = input("¿Cómo te llamas? ")
+nombre = nombre.strip().title()
+print(f"Hola, {nombre}   ")
+```
+]
+
+--
+
+.pull-right[
+
+También puedes encadenar todo en una línea:
+
+```python
+nombre = input("¿Cómo te llamas? ").strip().title()
+print(f"Hola, {nombre}   ")
+```
+]
+
+--
+
+.pull-left[
+
+&lt;span style="color:brown"&gt;¿Qué cosas puede _hacer_ un objeto `str`?
+```python
+dir(nombre)
+```
+]
+
+---
+
+# Variable type `int`
+
+.pull-left[
+&lt;b style="color:#6082B6"&gt;Pidamos al usuario dos enteros&lt;/b&gt;
+```python
+x = input("¿Cuál es x? ")
+y = input("¿Cuál es y? ")
+print(x + y)
+```
+]
+
+--
+
+.pull-right[
+&lt;b style="color:#6082B6"&gt;¿Que `type` es `x` o `y`?&lt;/b&gt;
+```python
+x = input("¿Cuál es x? ")
+print(type(x))
+y = input("¿Cuál es y? ")
+print(type(y))
+```
+]
+
+--
+
+.pull-left[
+&lt;b style="color:#6082B6"&gt;Convertir el `type` a `int`&lt;/b&gt;
+```python
+x = int(input("¿Cuál es x? "))
+print(type(x))
+y = int(input("¿Cuál es y? "))
+print(type(y))
+print(x+y)
+```
+]
+
+.pull-right[
+Objetos: segun su `type`tienen asociado
+
+**Atributos** → Son variables internas del objeto que describen su estado o propiedades.
+
+**Métodos** → Son funciones asociadas al objeto que permiten modificarlo o interactuar con él.
+]
+
+---
+# Variables type `float`
+
+.pull-left[
+&lt;b style="color:#6082B6"&gt;Convertir el `type` a `float`&lt;/b&gt;
+```python
+x = float(input("¿Cuál es x? "))
+y = float(input("¿Cuál es y? "))
+print(round(x / y, 2))  
+print(f"{x / y:.2f}") 
+```
+]
+
+--
+
+.pull-right[
+&lt;b style="color:#6082B6"&gt;Veamos: que es `round` o `.2f`&lt;/b&gt;
+
+Cuando no sabemos algo: &lt;b style="color:tomato"&gt;preguntamos&lt;/b&gt;
+
+&gt; &lt;a href= "https://docs.python.org/3/library/functions.html" style="color:brown"&gt;Built in Functions: Documentation&lt;/a&gt;
+
+
+]
+
+.pull-right[
+&lt;b style="color:#6082B6"&gt;Veamos: que es `round` o `.2f`&lt;/b&gt;
+
+Cuando no sabemos algo: &lt;b style="color:tomato"&gt;preguntamos&lt;/b&gt;
+
+&gt; &lt;a href= "https://docs.python.org/3/library/functions.html" style="color:brown"&gt;Built in Functions: Documentation&lt;/a&gt;
+
+
+]
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
